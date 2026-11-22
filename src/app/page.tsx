@@ -12,31 +12,22 @@ import SiteFooter from "@/components/SiteFooter";
 
 const actions = [
   {
+    href: "/services/city-reports",
+    icon: MapPin,
+    title: "Report a local problem",
+    khmer: "រាយការណ៍បញ្ហាក្នុងសហគមន៍",
+    help: "Road, streetlight, or rubbish problem?",
+    action: "Report a problem",
+    tone: "blue",
+  },
+  {
     href: "/services/lost-found",
     icon: Heart,
     title: "Lost or found an item?",
     khmer: "ស្វែងរក ឬរាយការណ៍របស់បាត់",
     help: "Find an item or report one you found.",
     action: "Open Lost & Found",
-    tone: "blue",
-  },
-  {
-    href: "/services/city-reports",
-    icon: MapPin,
-    title: "Report a local problem",
-    khmer: "រាយការណ៍បញ្ហាក្នុងសហគមន៍",
-    help: "Tell your local office about a road, light, or waste problem.",
-    action: "Report a problem",
     tone: "gold",
-  },
-  {
-    href: "/services/emergency",
-    icon: ShieldAlert,
-    title: "Get emergency help",
-    khmer: "សុំជំនួយបន្ទាន់",
-    help: "See emergency numbers and share a location in the demo.",
-    action: "Open emergency help",
-    tone: "red",
   },
   {
     href: "/services/community",
@@ -46,6 +37,15 @@ const actions = [
     help: "Browse local services and community information.",
     action: "Find a service",
     tone: "green",
+  },
+  {
+    href: "/services/emergency",
+    icon: ShieldAlert,
+    title: "Get emergency help",
+    khmer: "សុំជំនួយបន្ទាន់",
+    help: "View emergency contacts and the demo report flow.",
+    action: "Open emergency help",
+    tone: "red",
   },
 ];
 
@@ -89,28 +89,60 @@ export default function HomePage() {
         <section className="home-start-section" aria-labelledby="home-start-title">
           <div className="home-section-title">
             <div><span>START HERE · ចាប់ផ្តើមទីនេះ</span><h2 id="home-start-title">What do you need help with?</h2></div>
-            <p>Choose one. You can change your mind at any time.</p>
           </div>
           <div className="home-action-grid">
             {actions.map(({ href, icon: Icon, title, khmer, help, action, tone }) => (
               <Link className={`home-action-card ${tone}`} href={href} key={href}>
                 <span className="home-action-icon"><Icon size={25} aria-hidden="true" /></span>
                 <span className="home-action-title">{title}</span>
-                <span className="home-action-khmer" lang="km">{khmer}</span>
-                <span className="home-action-help">{help}</span>
+                <span className="home-action-detail">
+                  <span className="home-action-khmer" lang="km">{khmer}</span>
+                  <span className="home-action-help">{help}</span>
+                </span>
                 <span className="home-action-go">{action}<ArrowRight size={16} aria-hidden="true" /></span>
               </Link>
             ))}
           </div>
         </section>
 
-        <section className="home-how-section" aria-labelledby="home-how-title">
-          <h2 id="home-how-title">Using this service is simple</h2>
-          <ol>
-            <li><b>1</b><span>Choose the service you need.</span></li>
-            <li><b>2</b><span>Follow the short steps on that page.</span></li>
-            <li><b>3</b><span>Ask someone you trust to help if needed.</span></li>
-          </ol>
+        <section className="home-dashboard-layout" aria-label="Community updates and help">
+          <div className="home-community-feed">
+            <div className="home-feed-heading">
+              <div><h2>Community updates</h2><p>Examples of what you can report or find.</p></div>
+              <Link href="/services/city-reports">See services <ArrowRight size={15} /></Link>
+            </div>
+            <div className="home-example-list">
+              <article className="home-example-card">
+                <span className="home-example-icon blue"><MapPin size={20} /></span>
+                <div><span className="home-example-label">EXAMPLE</span><h3>Street flooded after heavy rain</h3><p>Near Chbar Ampov bridge</p></div>
+                <Link href="/services/city-reports" aria-label="View local problem reporting"><ArrowRight size={18} /></Link>
+              </article>
+              <article className="home-example-card">
+                <span className="home-example-icon gold"><Heart size={20} /></span>
+                <div><span className="home-example-label">EXAMPLE</span><h3>Honda moto key with keychain</h3><p>Found near Aeon Mall Sen Sok</p></div>
+                <Link href="/services/lost-found" aria-label="View Lost and Found"><ArrowRight size={18} /></Link>
+              </article>
+              <article className="home-example-card">
+                <span className="home-example-icon green"><Users size={20} /></span>
+                <div><span className="home-example-label">EXAMPLE</span><h3>Free dengue prevention talk</h3><p>Community event · Boeng Kak 2</p></div>
+                <Link href="/services/community" aria-label="View community services"><ArrowRight size={18} /></Link>
+              </article>
+            </div>
+          </div>
+          <aside className="home-help-panel">
+            <h2>Need help?</h2>
+            <p>Choose a number to call, or ask someone nearby to help you use this website.</p>
+            <div className="home-help-numbers">
+              <a href="tel:117"><b>117</b><span>Police</span></a>
+              <a href="tel:118"><b>118</b><span>Fire</span></a>
+              <a href="tel:119"><b>119</b><span>Ambulance</span></a>
+            </div>
+            <Link className="home-help-link" href="/services/emergency">More emergency help <ArrowRight size={15} /></Link>
+            <div className="home-help-secondary">
+              <Link href="/services/community"><Users size={17} /> Nearby community services <ArrowRight size={15} /></Link>
+              <Link href="/services/lost-found"><Heart size={17} /> Lost &amp; Found <ArrowRight size={15} /></Link>
+            </div>
+          </aside>
         </section>
 
         <p className="home-data-note"><PhoneCall size={15} /> Emergency calls go directly to the phone service. Other reports on this demo site are examples and are not sent to government offices.</p>

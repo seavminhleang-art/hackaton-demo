@@ -10943,6 +10943,77 @@ html[data-theme="dark"] .module-page:has(.community-hero) .module-heading .eyebr
 .landing-nav.community-home-old-nav nav a:hover {background:#fff;color:#143f9d;}
 .landing-nav.community-home-old-nav nav a.community-home-active-link {background:#eaf0fc;color:#073fa6;box-shadow:0 1px 5px #19345a12;}
 .landing-nav.community-home-old-nav .landing-nav-actions {justify-self:end;display:flex;align-items:center;gap:12px;}
+
+/* Homepage layout follows the simple, service-first community reference. */
+.community-home {background:#faf8f5;}
+.community-home-content {max-width:1312px;}
+.home-start-section {padding:27px 0 30px;}
+.home-section-title {margin-bottom:14px;}
+.home-section-title h2 {font-size:23px!important;}
+.home-section-title>div>span {font-size:12px!important;}
+.home-action-grid {grid-template-columns:2fr repeat(3,minmax(0,1fr));gap:12px;}
+.home-action-card {min-height:138px;grid-template-columns:48px minmax(0,1fr) auto;grid-template-rows:auto auto;align-items:center;column-gap:13px;padding:16px 18px;border:1px solid #eeeae5;border-top:1px solid #eeeae5;border-radius:16px;box-shadow:0 2px 3px #3427170a;}
+.home-action-card:first-child {min-height:138px;grid-template-columns:58px minmax(0,1fr) auto;padding:18px 20px;border:1px solid #2146ad;background:#244bb6;color:#fff;}
+.home-action-icon {grid-column:1;grid-row:1 / span 2;width:48px;height:48px;margin:0;border-radius:13px;}
+.home-action-card:first-child .home-action-icon {width:56px;height:56px;background:#ffffff25;color:#fff;}
+.home-action-title {grid-column:2;grid-row:1;color:#17243a;font-size:17px!important;}
+.home-action-card:first-child .home-action-title {color:#fff;font-size:20px!important;}
+.home-action-detail {grid-column:2;grid-row:2;min-width:0;}
+.home-action-khmer {margin-top:2px;color:#667085;font-size:13px!important;font-weight:500;line-height:1.4;}
+.home-action-help {display:none;}
+.home-action-go {grid-column:3;grid-row:1 / span 2;display:flex;align-items:center;gap:8px;margin:0;color:#1946aa;font-size:0!important;white-space:nowrap;}
+.home-action-go svg {width:19px;height:19px;}
+.home-action-card:first-child .home-action-go {font-size:13px!important;color:#fff;}
+.home-action-card:first-child .home-action-khmer {color:#e8efff;}
+.home-action-card.gold .home-action-icon {background:#fbf3df;}.home-action-card.red .home-action-icon {background:#fdebed;}
+.home-dashboard-layout {display:grid;grid-template-columns:minmax(0,1.8fr) minmax(300px,.9fr);gap:24px;align-items:start;}
+.home-community-feed,.home-help-panel {min-width:0;}
+.home-feed-heading {display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 12px;}
+.home-feed-heading h2,.home-help-panel h2 {margin:0;color:#17243a;font-size:20px!important;line-height:1.3;}
+.home-feed-heading p,.home-help-panel>p {margin:3px 0 0;color:#687387;font-size:13px!important;line-height:1.5;}
+.home-feed-heading>a,.home-help-link {display:inline-flex;align-items:center;gap:6px;color:#123f9f;font-size:13px!important;font-weight:700;text-decoration:none;white-space:nowrap;}
+.home-example-list {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+.home-example-card {min-height:127px;display:grid;grid-template-columns:44px minmax(0,1fr) 20px;align-items:start;gap:11px;padding:16px;border:1px solid #eeeae5;border-radius:16px;background:#fff;box-shadow:0 2px 3px #3427170a;}
+.home-example-card:last-child {grid-column:1 / -1;min-height:94px;}
+.home-example-icon {width:44px;height:44px;display:grid;place-items:center;border-radius:12px;background:#eaf0fd;color:#1948a5;}
+.home-example-icon.gold {background:#fbf3df;color:#966600;}.home-example-icon.green {background:#e8f4ed;color:#236b48;}
+.home-example-card>div {min-width:0;}
+.home-example-label {color:#a66f00;font-size:10px!important;font-weight:750;letter-spacing:.4px;}
+.home-example-card h3 {margin:3px 0 2px;color:#18243a;font-size:15px!important;line-height:1.35;}
+.home-example-card p {margin:0;color:#687387;font-size:13px!important;line-height:1.45;}
+.home-example-card>a {display:grid;place-items:center;min-height:28px;color:#62718a;}
+.home-help-panel {padding:20px;border:1px solid #eeeae5;border-radius:16px;background:#fff;box-shadow:0 2px 3px #3427170a;}
+.home-help-numbers {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:16px 0 13px;}
+.home-help-numbers a {min-height:70px;display:grid;align-content:center;gap:2px;padding:9px 11px;border:1px solid #f4c1c6;border-radius:13px;background:#fff0f1;color:#b7132a;text-decoration:none;}
+.home-help-numbers a b {font-size:21px!important;line-height:1.1;}
+.home-help-numbers a span {color:#593c3e;font-size:12px!important;}
+.home-help-link {padding-bottom:15px;border-bottom:1px solid #eeeae5;}
+.home-help-secondary {display:grid;gap:0;margin-top:4px;}
+.home-help-secondary a {display:flex;align-items:center;gap:9px;min-height:44px;border-bottom:1px solid #f0ede8;color:#27354a;font-size:13px!important;font-weight:650;text-decoration:none;}
+.home-help-secondary a:last-child {border-bottom:0;}
+.home-help-secondary a svg:first-child {color:#1948a5;}
+.home-help-secondary a svg:last-child {margin-left:auto;color:#738096;}
+@media(max-width:900px) {
+ .home-dashboard-layout {grid-template-columns:1fr;gap:16px;}
+ .home-action-grid {grid-template-columns:repeat(2,minmax(0,1fr));}
+ .home-action-card:first-child {grid-column:1 / -1;}
+}
+@media(max-width:600px) {
+ .home-start-section {padding:22px 0;}
+ .home-action-grid {grid-template-columns:1fr;gap:9px;}
+ .home-action-card,.home-action-card:first-child {min-height:96px;grid-template-columns:44px minmax(0,1fr) auto;grid-template-rows:auto auto;padding:13px;border-radius:13px;}
+ .home-action-card:first-child {min-height:110px;grid-template-columns:48px minmax(0,1fr) auto;}
+ .home-action-icon,.home-action-card:first-child .home-action-icon {width:42px;height:42px;}
+ .home-action-card:first-child .home-action-icon {width:46px;height:46px;}
+ .home-action-title {font-size:16px!important;}
+ .home-action-card:first-child .home-action-title {font-size:17px!important;}
+ .home-action-khmer {font-size:12px!important;}
+ .home-action-card:first-child .home-action-go {font-size:0!important;}
+ .home-example-list {grid-template-columns:1fr;}
+ .home-example-card,.home-example-card:last-child {grid-column:auto;min-height:92px;padding:13px;}
+ .home-feed-heading h2,.home-help-panel h2 {font-size:18px!important;}
+ .home-help-panel {padding:16px;}
+}
 @media(max-width:900px) {
  .landing-nav.community-home-old-nav {grid-template-columns:minmax(200px,1fr) auto;gap:10px 16px;padding:10px 20px;}
  .landing-nav.community-home-old-nav nav {grid-column:1/-1;grid-row:2;justify-self:center;max-width:100%;overflow-x:auto;}

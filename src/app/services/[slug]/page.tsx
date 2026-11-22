@@ -24,7 +24,9 @@ export default function ServicePage({ params }: PageProps<"/services/[slug]">) {
   );
 }
 
-async function ServiceContent({ params }: PageProps<"/services/[slug]">) {
+async function ServiceContent({
+  params,
+}: Pick<PageProps<"/services/[slug]">, "params">) {
   const { slug } = await params;
   if (!Object.hasOwn(serviceModules, slug)) notFound();
   return (

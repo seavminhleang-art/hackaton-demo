@@ -212,8 +212,8 @@ export default function ProfileApp() {
             Check the community guide or get in touch with the Found Cambodia
             team.
           </p>
-          <Link href="/about">
-            Community guide <span>→</span>
+          <Link href="/services/community">
+            Browse community services <span>→</span>
           </Link>
         </div>
         <Link className="user-row profile-user-row" href="/profile">
@@ -234,7 +234,6 @@ export default function ProfileApp() {
         <header className="topbar profile-topbar">
           <nav className="app-primary-nav" aria-label="Main navigation">
             <Link href="/dashboard">Home</Link>
-            <Link href="/about">About</Link>
             <details className="nav-community-menu">
               <summary>
                 Community <ChevronDown size={13} aria-hidden="true" />
@@ -609,9 +608,9 @@ export default function ProfileApp() {
           <footer className="profile-footer">
             <span>© 2026 Found Cambodia · Community platform demo</span>
             <nav>
-              <Link href="/about">Community guidelines</Link>
-              <Link href="/about">Privacy policy</Link>
-              <Link href="/about">About us</Link>
+              <Link href="/services/community">Community services</Link>
+              <Link href="/profile#privacy">Privacy settings</Link>
+              <Link href="/">Home</Link>
             </nav>
           </footer>
         </div>

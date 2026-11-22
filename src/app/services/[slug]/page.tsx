@@ -49,7 +49,6 @@ function ServiceFallback() {
             <b>Community service</b>
           </div>
           <nav className="service-top-nav" aria-label="Service pages">
-            <Link href="/about">About</Link>
             <Link href="/services/lost-found">Lost &amp; Found</Link>
             <Link href="/services/city-reports">Government reports</Link>
             <Link href="/services/emergency">Emergency contact</Link>

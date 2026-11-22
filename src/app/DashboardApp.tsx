@@ -419,6 +419,7 @@ export default function Home({
             : "lost";
   const [items, setItems] = useState(initialItems);
   const [tab, setTab] = useState("All items");
+  const [visibleCount, setVisibleCount] = useState(3);
   const [category, setCategory] = useState("All items");
   const [query, setQuery] = useState("");
   const [city, setCity] = useState("All Cambodia");
@@ -428,6 +429,7 @@ export default function Home({
   const [modal, setModal] = useState<"post" | "claim" | "comments" | null>(
     null,
   );
+  const [postType, setPostType] = useState<"Lost" | "Found">("Lost");
   const [postPhoto, setPostPhoto] = useState("");
   const [selected, setSelected] = useState<Item | null>(null);
   const [notice, setNotice] = useState("");
@@ -446,14 +448,24 @@ export default function Home({
       ),
     [items, tab, category, city, place, dateFilter, query],
   );
+  useEffect(() => {
+    setVisibleCount(3);
+  }, [tab, category, city, place, dateFilter, query]);
   const flash = (message: string) => {
     setNotice(message);
     window.setTimeout(() => setNotice(""), 3200);
   };
-  const open = (kind: "post" | "claim" | "comments", item?: Item) => {
+  const open = (
+    kind: "post" | "claim" | "comments",
+    item?: Item,
+    nextPostType: "Lost" | "Found" = "Lost",
+  ) => {
     if ((kind === "post" || kind === "claim") && !requireDemoAccount()) return;
     setSelected(item ?? null);
-    if (kind === "post") setPostPhoto("");
+    if (kind === "post") {
+      setPostPhoto("");
+      setPostType(nextPostType);
+    }
     setModal(kind);
   };
   const submitPost = (form: FormData) => {
@@ -658,7 +670,6 @@ export default function Home({
               >
                 Home
               </Link>
-              <Link href="/about">About</Link>
               <details
                 className={`nav-community-menu ${activeModule !== "home" ? "is-active" : ""}`}
               >
@@ -681,7 +692,6 @@ export default function Home({
           )}
           {standalone && (
             <nav className="service-top-nav" aria-label="Service pages">
-              <Link href="/about">About</Link>
               <Link className={activeModule === "lost" ? "active" : ""} href="/services/lost-found">Lost &amp; Found</Link>
               <Link className={activeModule === "city" ? "active" : ""} href="/services/city-reports">Government reports</Link>
               <Link className={activeModule === "emergency" ? "active" : ""} href="/services/emergency">Emergency contact</Link>
@@ -748,22 +758,18 @@ export default function Home({
                   help someone find their way back to it.
                 </p>
                 <div className="hero-actions">
-                  <Button
-                    className="button primary"
-                    onClick={() => open("post")}
-                  >
-                    <Plus size={16} /> Post an item
-                  </Button>
                   <button
-                    className="button secondary"
-                    onClick={() => {
-                      setTab("Lost");
-                      document
-                        .getElementById("listings")
-                        ?.scrollIntoView({ behavior: "smooth" });
-                    }}
+                    className="button primary simple-task-button"
+                    onClick={() => open("post", undefined, "Lost")}
                   >
-                    Browse lost items <ArrowRight size={15} />
+                    <span className="task-button-icon"><Icon name="search" size={20} /></span>
+                    <span><b>I lost an item</b><small>Help me find it</small></span>
+                    <ArrowRight size={17} />
+                  </button>
+                  <button className="button secondary simple-task-button" onClick={() => open("post", undefined, "Found")}>
+                    <span className="task-button-icon found-task"><Plus size={20} /></span>
+                    <span><b>I found an item</b><small>Help return it</small></span>
+                    <ArrowRight size={17} />
                   </button>
                 </div>
               </div>
@@ -823,9 +829,9 @@ export default function Home({
                 </div>
                 <Button
                   className="button primary post-small"
-                  onClick={() => open("post")}
+                  onClick={() => open("post", undefined, "Lost")}
                 >
-                  <Plus size={16} /> Post an item
+                  <Plus size={16} /> Report a lost item
                 </Button>
               </div>
               <div className="filter-bar">
@@ -838,32 +844,35 @@ export default function Home({
                   />
                   <kbd>⌘ K</kbd>
                 </label>
-                <label className="category-select">
-                  <select
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                  >
-                    {categories.map((c) => (
-                      <option key={c} value={c}>{c === "All items" ? "All categories" : c}</option>
-                    ))}
-                  </select>
-                  <span>⌄</span>
-                </label>
-                <label className="category-select extra-filter">
-                  <select value={city} onChange={(e) => setCity(e.target.value)} aria-label="Filter by province">
-                    {["All Cambodia", "Phnom Penh", "Siem Reap", "Battambang", "Kampot", "Kep"].map((option) => <option key={option} value={option}>{option === "All Cambodia" ? "All provinces" : option}</option>)}
-                  </select><span>⌄</span>
-                </label>
-                <label className="category-select extra-filter">
-                  <select value={place} onChange={(e) => setPlace(e.target.value)} aria-label="Filter by city">
-                    {["All cities", ...Array.from(new Set(items.map((item) => item.place)))].map((option) => <option key={option}>{option}</option>)}
-                  </select><span>⌄</span>
-                </label>
-                <label className="category-select extra-filter">
-                  <select value={dateFilter} onChange={(e) => setDateFilter(e.target.value)} aria-label="Filter by date">
-                    {["All dates", "Today", "This week"].map((option) => <option key={option}>{option}</option>)}
-                  </select><span>⌄</span>
-                </label>
+                <details className="simple-more-filters">
+                  <summary>More filters <ChevronDown size={14} /></summary>
+                  <div className="simple-filter-options">
+                    <label className="category-select">
+                      <span>Category</span>
+                      <select value={category} onChange={(e) => setCategory(e.target.value)}>
+                        {categories.map((c) => <option key={c} value={c}>{c === "All items" ? "All categories" : c}</option>)}
+                      </select>
+                    </label>
+                    <label className="category-select">
+                      <span>Province</span>
+                      <select value={city} onChange={(e) => setCity(e.target.value)}>
+                        {["All Cambodia", "Phnom Penh", "Siem Reap", "Battambang", "Kampot", "Kep"].map((option) => <option key={option} value={option}>{option === "All Cambodia" ? "All provinces" : option}</option>)}
+                      </select>
+                    </label>
+                    <label className="category-select">
+                      <span>City or area</span>
+                      <select value={place} onChange={(e) => setPlace(e.target.value)}>
+                        {["All cities", ...Array.from(new Set(items.map((item) => item.place)))].map((option) => <option key={option}>{option}</option>)}
+                      </select>
+                    </label>
+                    <label className="category-select">
+                      <span>Date</span>
+                      <select value={dateFilter} onChange={(e) => setDateFilter(e.target.value)}>
+                        {["All dates", "Today", "This week"].map((option) => <option key={option}>{option}</option>)}
+                      </select>
+                    </label>
+                  </div>
+                </details>
               </div>
               <div className="tabs" role="tablist">
                 {["All items", "Lost", "Found"].map((option) => (
@@ -883,11 +892,11 @@ export default function Home({
                   </button>
                 ))}
                 <div className="results-label">
-                  Showing <b>{filtered.length} items</b>
+                  Showing <b>{Math.min(visibleCount, filtered.length)} of {filtered.length} items</b>
                 </div>
               </div>
               <div className="item-grid">
-                {filtered.map((item) => (
+                {filtered.slice(0, visibleCount).map((item) => (
                   <article className="item-card" key={item.id}>
                     <div className={`item-visual ${item.color}`}>
                       {item.photo && (
@@ -968,19 +977,14 @@ export default function Home({
                   </button>
                 </div>
               )}
-              <div className="load-row">
-                <span>
-                  You’re all caught up — check back soon for new posts.
-                </span>
-                <button
-                  onClick={() => {
-                    setItems([...items]);
-                    flash("You’re viewing the latest posts.");
-                  }}
-                >
-                  ↻ &nbsp;Refresh
-                </button>
-              </div>
+              {filtered.length > visibleCount && (
+                <div className="load-row">
+                  <span>Showing the latest community posts.</span>
+                  <button onClick={() => setVisibleCount((count) => count + 3)}>
+                    Show 3 more <ArrowRight size={14} />
+                  </button>
+                </div>
+              )}
             </section>
             <section className="lost-found-extras">
               <article className="how-it-works">
@@ -1070,7 +1074,7 @@ export default function Home({
                   <div className="form-row">
                     <label>
                       Is it lost or found?
-                      <select name="type">
+                      <select name="type" defaultValue={postType}>
                         <option>Lost</option>
                         <option>Found</option>
                       </select>

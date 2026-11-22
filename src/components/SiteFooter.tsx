@@ -30,9 +30,8 @@ export default function SiteFooter() {
           <nav className="site-footer-links" aria-label="Quick links">
             <h2>Quick links</h2>
             <Link href="/">Home</Link>
-            <Link href="/about">About Found Cambodia</Link>
-            <Link href="/#updates">Community updates</Link>
-            <Link href="/#how-it-works">How it works</Link>
+            <Link href="/#home-how-title">How to use</Link>
+            <Link href="/services/community">Community services</Link>
           </nav>
 
           <nav className="site-footer-links" aria-label="Services">
